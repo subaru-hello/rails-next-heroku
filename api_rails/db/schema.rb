@@ -13,6 +13,8 @@
 ActiveRecord::Schema.define(version: 2023_05_14_121029) do
 
   create_table "todos", force: :cascade do |t|
+    t.string "title"
+    t.text "contents"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

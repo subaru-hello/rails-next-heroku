@@ -1,14 +1,11 @@
 import { Todo } from '../../components/organisms/TodoList'; // You may need to move your types into a separate file
 
-interface TodoDetailsProps {
+type TodoDetailsProps = {
   id: number;
-  text: string;
-  isCompleted?: boolean;
 }
 
-const TodoDetails: React.FC<TodoDetailsProps> = (id) => {
-
-  
+const TodoDetails = ({id}: TodoDetailsProps) => {
+ 
     const todos = typeof window !== 'undefined' ? JSON.parse(localStorage.getItem('todos') || '[]') : [];
     console.log("id",id,todos)
     const todo: Todo = todos.find((todo: Todo) => todo.id === Number(id));

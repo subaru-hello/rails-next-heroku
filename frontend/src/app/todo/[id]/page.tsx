@@ -1,15 +1,10 @@
 import { Todo } from '../../components/organisms/TodoList'; // You may need to move your types into a separate file
 
-type TodoDetailsProps = {
-  id: number;
-}
 
-const TodoDetails = ({id}: TodoDetailsProps) => {
+const TodoDetails = (params: any) => {
  
     const todos = typeof window !== 'undefined' ? JSON.parse(localStorage.getItem('todos') || '[]') : [];
-    console.log("id",id,todos)
-    const todo: Todo = todos.find((todo: Todo) => todo.id === Number(id));
-console.log(todo)
+    const todo: Todo = todos.find((todo: Todo) => todo.id === Number(params.todo.id));
     if (!todo) {
         return <div>Todo not found</div>;
       }

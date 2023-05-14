@@ -22,4 +22,5 @@ test:
 
 production:
   <<: *default
-  database: db/production.sqlite3
+  database: todo_api_production
+  url: <%= ENV['DATABASE_URL'] %>

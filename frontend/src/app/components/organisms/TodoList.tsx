@@ -3,16 +3,21 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Todo from './Todo';
 import TodoForm from './TodoForm';
+import { axiosInstance } from '@/app/utils/axios';
 
 export interface Todo {
   id: number;
   text: string;
   isCompleted?: boolean;
 }
+export interface TestTodo {
+  title: string;
+  contents: string;
+}
 
 const TodoList: React.FC = () => {
   const [todos, setTodos] = useState<Todo[]>([]);
-
+const [testTodos, setTestTodos] = useState<TestTodo[]>([])
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const savedTodos = JSON.parse(localStorage.getItem('todos') || '[]');
@@ -25,6 +30,15 @@ const TodoList: React.FC = () => {
       localStorage.setItem('todos', JSON.stringify(todos));
     }
   }, [todos]);
+
+  useEffect(() => {
+    const f = async () => {
+      const res = await axiosInstance.get(`/todos`);
+      setTestTodos(res.data);
+    };
+    f();
+    console.log('test', testTodos)
+  }, []);
 
   const addTodo = (text: string) => {
     const newTodos = [...todos, { id: todos.length, text }];
@@ -47,6 +61,12 @@ const TodoList: React.FC = () => {
     <div className="app">
       <div className="todo-list">
         <TodoForm addTodo={addTodo} />
+        {testTodos.map((todo) => (
+          <>
+          <p>{todo.title}</p>
+          <p>{todo.contents}</p>
+          </>
+        ))}
         {todos.map((todo, index) => (
           <div key={index}>
             <Link href={`/todo/${todo.id}`}>

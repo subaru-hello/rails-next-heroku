@@ -41,7 +41,7 @@
     }
   },
   "lint-staged": {
-    "*.js": "eslint --fix"
+    "*.{js,ts,tsx,css,scss}": "prettier --write"
   },
   "volta": {
     "node": "16.13.0"

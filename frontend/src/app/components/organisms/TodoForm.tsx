@@ -1,11 +1,11 @@
-"use client";
-import { useState, FormEvent, ChangeEvent } from 'react';
+'use client';
+import {FC, useState, FormEvent, ChangeEvent } from 'react';
 
 interface TodoFormProps {
   addTodo: (text: string) => void;
 }
 
-const TodoForm: React.FC<TodoFormProps> = ({ addTodo }) => {
+const TodoForm: FC<TodoFormProps> = ({ addTodo }) => {
   const [value, setValue] = useState<string>('');
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
